@@ -49,7 +49,6 @@ class Authentication
         }
     }
 
-
     checkCookieSeniorAdmin(req, res, next)
     {
         try{

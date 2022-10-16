@@ -6,8 +6,6 @@ $(document).ready(function (){
                 appLogin.handleLogin()
             })
         },
-        animation: function (){
-        },
         handleLogin: function (){
             let username = $('#username').val()
             let password = $('#password').val()
@@ -29,6 +27,7 @@ $(document).ready(function (){
                             }
                         } else {
                             appLogin.animation()
+                            $('.error-login').html("username and password wrong")
                             $('.error-login').show()
                         }
                     },
@@ -41,6 +40,16 @@ $(document).ready(function (){
             else {
                 $('.error-login').html("please enter username and password")
                 $('.error-login').show()
+            }
+        },
+        animation: function (){
+            if($('.overplay-animation').css('display') == 'none')
+            {
+                $('.overplay-animation').css('display', 'block')
+            }
+            else
+            {
+                $('.overplay-animation').css('display', 'none')
             }
         },
         run: function (){

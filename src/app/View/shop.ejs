@@ -11,14 +11,14 @@
     </tr>
     </thead>
     <tbody>
-    <% for (let i = 0; i < 100;i++) {%>
+    <% for (let i = 0; i < shopList.length;i++) {%>
         <tr>
             <th scope="row"><%= i + 1 %></th>
-            <td >Larry the Bird</td>
-            <td >Larry the Bird</td>
+            <td ><%= shopList[i].shop_name %></td>
+            <td ><%= shopList[i].address %></td>
             <td>
-                <button class="btn btn-warning">Edit</button>
-                <button class="btn btn-danger" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirm_delete">Delete</button>
+                <button class="btn btn-warning" data-shop-id="<%= shopList[i].shop_id %>">Edit</button>
+                <button data-shop-id="<%= shopList[i].shop_id %>" class="btn btn-danger btn-delete-shop" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirm_delete">Delete</button>
             </td>
         </tr>
     <%}%>
@@ -36,11 +36,11 @@
             <form id="shop_form">
                 <div class="modal-body">
                     <label for="txt_shop_name">Shop name</label>
-                    <input type="text" placeholder="category name" id="txt_shop_name" class="form-control mb-1" required>
+                    <input type="text" placeholder="shop name" id="txt_shop_name" class="form-control mb-1" required>
                 </div>
                 <div class="modal-body">
                     <label for="txt_shop_address">Address</label>
-                    <input type="text" placeholder="category name" id="txt_shop_address" class="form-control mb-1" required>
+                    <input type="text" placeholder="address" id="txt_shop_address" class="form-control mb-1" required>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

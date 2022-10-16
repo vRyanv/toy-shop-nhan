@@ -24,6 +24,7 @@ function indexRoute(app){
 
     //shop
     app.post("/shop/new", authentication.checkCookieSeniorAdmin, seniorController.newShop)
+    app.delete("/shop/delete", authentication.checkCookieSeniorAdmin, seniorController.deleteShop)
 
     app.get('*', homeController.notFound)
 }
