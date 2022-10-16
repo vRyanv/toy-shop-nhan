@@ -1,0 +1,52 @@
+<div class="mt-3 mb-3" style="text-align: end; margin-right: 1.5rem">
+    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#new_shop_model" style="width: 8rem;margin-left: 2rem">New</button>
+</div>
+<table class="table table-striped" style="text-align: center">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Shop name</th>
+        <th scope="col">Address</th>
+        <th scope="col">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% for (let i = 0; i < 100;i++) {%>
+        <tr>
+            <th scope="row"><%= i + 1 %></th>
+            <td >Larry the Bird</td>
+            <td >Larry the Bird</td>
+            <td>
+                <button class="btn btn-warning">Edit</button>
+                <button class="btn btn-danger" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirm_delete">Delete</button>
+            </td>
+        </tr>
+    <%}%>
+    </tbody>
+</table>
+
+<!-- Modal -->
+<div class="modal fade" id="new_shop_model" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog  modal-dialog-centered ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel" >Add Shop</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="shop_form">
+                <div class="modal-body">
+                    <label for="txt_shop_name">Shop name</label>
+                    <input type="text" placeholder="category name" id="txt_shop_name" class="form-control mb-1" required>
+                </div>
+                <div class="modal-body">
+                    <label for="txt_shop_address">Address</label>
+                    <input type="text" placeholder="category name" id="txt_shop_address" class="form-control mb-1" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button  class="btn btn-primary" id="btn_add_shop">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

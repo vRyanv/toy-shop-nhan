@@ -1,0 +1,29 @@
+<head>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="Css/loginForm.css" type="text/css">
+
+</head>
+<body>
+<div class="background">
+    <div class="shape"></div>
+    <div class="shape"></div>
+</div>
+<form action="/" method="post" id="login_form">
+    <a href="/"><h3>Sign in</h3></a>
+    <a href="/register"><h3> Sign Up </h3> </a>
+
+    <label for="username">Username</label>
+    <input type="text" placeholder="Enter your user name" id="username" name="username">
+
+    <label for="password">Password</label>
+    <input type="password" placeholder="Password" id="password" name="password">
+    <div class="error-login">username or password wrong</div>
+    <button type="submit" id="btn-login" name="btn-login" >Log In</button>
+</form>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+<script src="/js/login.js"></script>
+</html>
+
