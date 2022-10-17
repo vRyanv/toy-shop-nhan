@@ -24,7 +24,15 @@ function indexRoute(app){
 
     //shop
     app.post("/shop/new", authentication.checkCookieSeniorAdmin, seniorController.newShop)
+    app.get("/shop/edit/:id", authentication.checkCookieSeniorAdmin, seniorController.getInfoShop)
+    app.post("/shop/edit/", authentication.checkCookieSeniorAdmin, seniorController.updateShop)
     app.delete("/shop/delete", authentication.checkCookieSeniorAdmin, seniorController.deleteShop)
+
+    //staff
+    app.get('/staff', authentication.checkCookieSeniorAdmin, seniorController.staffList)
+    app.post('/staff/new', authentication.checkCookieSeniorAdmin, seniorController.newStaff)
+    app.get('/staff/edit/:id', authentication.checkCookieSeniorAdmin, seniorController.getStaffInfo)
+    app.put('/staff/edit', authentication.checkCookieSeniorAdmin, seniorController.updateStaff)
 
     app.get('*', homeController.notFound)
 }

@@ -1,0 +1,72 @@
+<div class="mt-3 mb-3" style="text-align: end; margin-right: 1.5rem">
+    <button class="btn btn-success" id="btn_new_staff" data-bs-toggle="modal" data-bs-target="#new_staff_model" style="width: 8rem;margin-left: 2rem">New</button>
+</div>
+<table class="table table-striped" style="text-align: center">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Staff name</th>
+        <th scope="col">Shop name</th>
+        <th scope="col">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% for (let i = 0; i < staffList.length;i++) {%>
+        <tr>
+            <th scope="row"><%= i + 1 %></th>
+            <td ><%= staffList[i].name %></td>
+            <td ><%= staffList[i].shop_name %></td>
+            <td>
+                <button class="btn btn-warning btn-edit-staff" data-staff-id="<%= staffList[i].account_id %>">Edit</button>
+                <button data-staff-id="<%= staffList[i].account_id %>" class="btn btn-danger btn-delete-staff" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirm_delete">Delete</button>
+            </td>
+        </tr>
+    <%}%>
+    </tbody>
+</table>
+<!-- Modal -->
+<div class="modal fade" id="new_staff_model" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog  modal-dialog-centered ">
+        <div class="modal-content" id="modal_content_form_staff">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 title-staff-form" id="exampleModalLabel" >Add Staff</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="staff_form">
+                <div class="modal-body">
+                    <label for="txt_username">Username</label>
+                    <input type="text" placeholder="username" name="username" id="txt_username" class="form-control mb-1" required>
+                    <span id="error_username" style="position: absolute;color: red;">username is existed</span>
+                </div>
+                <div class="modal-body">
+                    <label for="txt_pass">Password</label>
+                    <input type="password" placeholder="password" name="password" id="txt_pass" class="form-control mb-1" required>
+                </div>
+                <div class="modal-body">
+                    <label for="txt_confirm_pass">Confirm password</label>
+                    <input type="password" placeholder="confirm password" id="txt_confirm_pass" class="form-control mb-1" required>
+                    <span id="error_confirm_pass" style="position: absolute;color: red;">Confirm password not match!</span>
+                </div>
+                <div class="modal-body">
+                    <label for="txt_staff_name">staff name</label>
+                    <input type="text" placeholder="address" name="staffName" id="txt_staff_name" class="form-control mb-1" required>
+                </div>
+                <div class="modal-body">
+                    <label for="sb_shop">Shop management</label>
+                    <select name="" id="sb_shop" name="shopId" class="form-control" required>
+                        <option value="">Choose shop</option>
+                        <% for (let i=0;i<shopList.length;i++){ %>
+                            <option value="<%= shopList[i].shop_id %>"><%= shopList[i].shop_name %></option>
+                        <% } %>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button  type="submit" class="btn btn-primary" id="btn_add_staff">Add</button>
+                </div>
+                <input type="hidden" value="" name="staffId" id="hidden_staff_id">
+            </form>
+            <button type="button" hidden id="btn_open_edit_form" data-bs-toggle="modal" data-bs-target="#new_staff_model"></button>
+        </div>
+    </div>
+</div>

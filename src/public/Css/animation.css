@@ -90,3 +90,9 @@
     height: 100%;
     display: none
 }
+
+
+#error_confirm_pass,
+#error_username{
+    display: none;
+}
