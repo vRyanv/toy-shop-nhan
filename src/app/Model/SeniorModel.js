@@ -81,6 +81,11 @@ class SeniorModel{
             })
     }
 
+    deleteStaff(staffId){
+        return database.query(`delete from account where account_id = ${staffId}`).then((result) => {
+            return result.rowCount
+        })
+    }
 }
 
 module.exports = new SeniorModel

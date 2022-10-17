@@ -1,0 +1,96 @@
+<div class="root-product" style="text-align: center">
+<div class="mt-3 mb-3" style="text-align: end; margin-right: 1.5rem">
+    <button class="btn btn-success" id="btn_new_product" data-bs-toggle="modal" data-bs-target="#new_pro_model" style="width: 8rem;margin-left: 2rem">New</button>
+</div>
+<% for (let i=0;i<100;i++) {%>
+<div class="page-wrapper">
+    <div class="page-inner">
+        <div class="">
+            <div class="col-3">
+            <div class="el-wrapper">
+                <div class="box-up">
+                    <img class="img" src="http://code.slicecrowd.com/labs/4/images/t-shirt.png" alt="">
+                    <div class="img-info">
+                        <div class="info-inner">
+                            <span class="p-company">Category: asdf afsd</span>
+                            <span class="p-company">supplier: asfoismoidf</span>
+                        </div>
+                        <div class="a-size">Price : <span class="size">$123</span></div>
+                    </div>
+                </div>
+
+                <div class="box-down">
+                    <div class="h-bg">
+                        <div class="h-bg-inner"></div>
+                    </div>
+
+                    <a class="cart" href="#">
+                        <span class="price">Nhan WIBU</span>
+                        <span class="add-to-cart">
+                            <div class="btn-group">
+              <span class="txt"><button class="btn btn-warning">Edit</button></span>
+              <span class="txt"><button class="btn btn-danger">Delete</button></span>
+                                </div>
+            </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+<%}%>
+</div>
+<!-- model-->
+<div class="modal fade" id="new_pro_model" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog  modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Add product</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div style="padding:1rem">
+                <form action="/product-add" method="post" id="pro_form">
+                    <div class="mb-4">
+                        <label for="pro_name" class="form-label">Name</label>
+                        <input type="text" name="proName" class="form-control" id="pro_name" placeholder="product name" style="display: inline-block" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="pro_cate" class="form-label">Category</label>
+                        <select class="form-control" name="cateId" id="pro_cate" style="display: inline-block" required>
+                            <option value="">Choose category</option>
+
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label for="pro_sup" class="form-label">Supplier</label>
+                        <select class="form-control" name="supId" id="pro_sup" style="display: inline-block" required>
+                            <option value="">Choose supplier</option>
+
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label for="pro_price" class="form-label">Price</label>
+                        <input type="number" name="price" class="form-control" id="pro_price" placeholder="price" style="display: inline-block" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="pro_quantity" class="form-label">Quantity</label>
+                        <input type="number" name="quantity" class="form-control" id="pro_quantity" placeholder="quantity" style="display: inline-block" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="img_preview" class="form-label" id="lb_img">Image</label>
+                        <div style="display: block">
+                            <img src="/image/demo-img.png" alt="..." class="img-thumbnail" id="img_preview" style="width: 13rem;" >
+                        </div>
+                        <input type="file" name="proImage" id="pro_img" hidden>
+                        <button type="button" class="btn btn-primary mt-3" id="btn_open_dialog_image">Choose image</button>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Add</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

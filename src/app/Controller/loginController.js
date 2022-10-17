@@ -6,15 +6,9 @@ class LoginController{
         res.render('login.ejs')
     }
 
-    handleLogin(req, res){
-        let username = req.body.username
-        let password = req.body.password
-
-        loginModel.userLogin(username, password).then((result) =>{
-            if(result !== 0){
-                res.render()
-            }
-        })
+    logout(req, res){
+        res.cookie('__token', '')
+        res.redirect('/')
     }
 
     checkexist(req, res){

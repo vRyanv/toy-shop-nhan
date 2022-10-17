@@ -41,6 +41,15 @@ $(document).ready(function (){
             $('#txt_confirm_pass').click(function (){
                 $('#error_confirm_pass').css('display', 'none')
             })
+
+            $('.btn-delete-staff').click(function (){
+                $('#modal_body_delete').html('Do you want to delete this Staff ?')
+                appStaff.staffId = $(this).data('staff-id')
+            })
+
+            $('#btn_ok_delete').click(function (){
+                appStaff.deleteStaff(appStaff.staffId)
+            })
         },
         getStaffInfo: function (staffId){
             $.ajax({
@@ -110,8 +119,25 @@ $(document).ready(function (){
 
             })
         },
-        deleteStaff: function (){
-
+        deleteStaff: function (staffId){
+            $.ajax({
+                url: '/staff/delete',
+                type: 'DELETE',
+                data: {staffId},
+                beforeSend: appStaff.animation(),
+                success: function (data){
+                    if(data.status === 200){
+                        location.href = '/staff'
+                    } else {
+                        appStaff.animation()
+                        alert('something wrong! ' + data.notification)
+                    }
+                },
+                error: function (){
+                    appStaff.animation()
+                    alert('something wrong!')
+                }
+            })
         },
         newStaff: function (staff){
             $.ajax({

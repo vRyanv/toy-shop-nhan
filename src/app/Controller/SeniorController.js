@@ -5,7 +5,7 @@ class SeniorController{
     //shop
     getDashboard(req, res){
         seniorModel.getShopList().then((result) => {
-            res.render('dashboardSenior.ejs',{module: 'shop', shopList: result})
+            res.render('dashboardSenior.ejs',{module: 'shop', role: req.role, shopList: result})
         })
     }
 
@@ -72,7 +72,7 @@ class SeniorController{
         const handleGetStaff = async () => {
             let staffList = await seniorModel.getStaffList()
             let shopList = await seniorModel.getShopList()
-            res.render('dashboardSenior.ejs', {module: 'staff', staffList, shopList})
+            res.render('dashboardSenior.ejs', {module: 'staff', role: req.role,staffList, shopList})
         }
         handleGetStaff()
     }
@@ -115,6 +115,17 @@ class SeniorController{
                 res.send({status:200, notification: 'update staff success'})
             } else {
                 res.send({status:200, notification: 'update staff fail'})
+            }
+        })
+    }
+
+    deleteStaff(req, res){
+        let staffId = req.body.staffId
+        seniorModel.deleteStaff(staffId).then((result) => {
+            if(result !== 0){
+                res.send({status:200, notification: 'delete staff success'})
+            } else {
+                res.send({status:400, notification: 'delete staff fail'})
             }
         })
     }
