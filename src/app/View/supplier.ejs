@@ -1,1 +1,49 @@
-supplier
+<div class="mt-3 mb-3" style="text-align: end; margin-right: 1.5rem">
+    <button class="btn btn-success" id="btn_new_sup" data-bs-toggle="modal" data-bs-target="#new_sup_model" style="width: 8rem;margin-left: 2rem">New</button>
+</div>
+<div style="padding: 3rem">
+    <table class="table table-striped" style="text-align: center; border: solid gray;">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Supplier name</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% for (let i = 0; i < supList.length;i++) {%>
+            <tr>
+                <th scope="row"><%= i + 1 %></th>
+                <td ><%= supList[i].supplier_name %></td>
+                <td>
+                    <button class="btn btn-warning btn-edit-sup" data-sup-id="<%= supList[i].supplier_id %>">Edit</button>
+                    <button data-sup-id="<%= supList[i].supplier_id %>" class="btn btn-danger btn-delete-sup" data-bs-toggle="modal" data-bs-target="#confirm_delete">Delete</button>
+                </td>
+            </tr>
+        <%}%>
+        </tbody>
+    </table>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="new_sup_model" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog  modal-dialog-centered ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="title_model_sup" >Add Supplier</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/supplier-add" method="post" id="sup_form">
+                <div class="modal-body">
+                    <label for="txt_sup_name">Supplier name</label>
+                    <input type="text" placeholder="supplier name" id="txt_sup_name" class="form-control mb-1" required>
+                    <input type="hidden" id="txt_sup_id">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" id="btn_submit_sup" class="btn btn-primary">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="btn_open_edit_form" data-bs-toggle="modal" data-bs-target="#new_sup_model">

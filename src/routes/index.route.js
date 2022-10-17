@@ -5,6 +5,7 @@ const authentication =require("../Middleware/authentication");
 const registerController=require("../app/Controller/registerController");
 const seniorController = require("../app/Controller/SeniorController");
 const adminController = require("../app/Controller/AdminController");
+const upload = require("../Middleware/upload");
 
 function indexRoute(app){
 
@@ -22,7 +23,7 @@ function indexRoute(app){
 
     //senior admin
     app.get("/dashboard-senior", authentication.checkCookieSeniorAdmin, seniorController.getDashboard)
-    app.get("/dashboard-admin", authentication.checkCookieAdmin, adminController.getDashBoard)
+
 
     //shop
     app.post("/shop/new", authentication.checkCookieSeniorAdmin, seniorController.newShop)
@@ -43,6 +44,21 @@ function indexRoute(app){
     app.get('/category/edit/:id', authentication.checkCookieAdmin, adminController.getInfoCate)
     app.put('/category/edit', authentication.checkCookieAdmin, adminController.updateCate)
     app.delete('/category/delete', authentication.checkCookieAdmin, adminController.deleteCate)
+
+    //supplier
+    app.get('/supplier', authentication.checkCookieAdmin, adminController.getSupList)
+    app.post('/supplier/new', authentication.checkCookieAdmin, adminController.newSup)
+    app.get('/supplier/edit/:id', authentication.checkCookieAdmin, adminController.getSupInfo)
+    app.put('/supplier/edit', authentication.checkCookieAdmin, adminController.updateSup)
+    app.delete('/supplier/delete', authentication.checkCookieAdmin, adminController.deleteSup)
+
+    //product
+    app.get("/dashboard-admin", authentication.checkCookieAdmin, adminController.getProList)
+    // app.get('/product/find/:name', authentication.checkCookieAdmin, adminController.findPro)
+    app.post('/product/new', authentication.checkCookieAdmin, upload.single('proImage'), adminController.newPro)
+    // app.get('/product/edit/:id', authentication.checkCookieAdmin, adminController.getProInfo)
+    // app.put('/product/edit', authentication.checkCookieAdmin, adminController.updatePro)
+    // app.delete('/product/delete', authentication.checkCookieAdmin, adminController.deletePro)
 
     //404
     app.get('*', homeController.notFound)
