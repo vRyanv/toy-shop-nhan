@@ -142,7 +142,13 @@ class AdminController{
                 quantity: req.body.quantity,
                 proImage: req.file.filename,
             }
-            console.log(product)
+            adminModel.newPro(product).then((result)  => {
+                if(result.rowCount !== 0){
+                    res.send({status:200, notification:'add product success'})
+                } else {
+                    res.send({status:400, notification:'add product fail'})
+                }
+            })
         } else {
             res.send({status: 400, notification: 'Invalid image'})
         }

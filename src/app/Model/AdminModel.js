@@ -107,6 +107,10 @@ class AdminModel{
                 return result.rows
             })
     }
+
+    newPro(product){
+        return database.query(`insert into product()`)
+    }
 }
 
 module.exports = new AdminModel
