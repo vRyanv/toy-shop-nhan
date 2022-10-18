@@ -13,7 +13,7 @@ const indexRoute = require('./routes/index.route')
 const app = express()
 
 //[GET] image from public
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'public/')))
 
 //middleware to get post method value
 app.use(express.urlencoded({extended:true}))
