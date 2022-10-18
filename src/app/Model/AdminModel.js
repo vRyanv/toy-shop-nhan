@@ -108,8 +108,116 @@ class AdminModel{
             })
     }
 
-    newPro(product){
-        return database.query(`insert into product()`)
+    newPro(product) {
+        return database.query(`insert into product(cat_id, supplier_id, shop_id, pro_name, price, quantity, pro_image)
+                               values (${product.cateId}, ${product.supId}, ${product.shopId}, '${product.proName}',
+                                       ${product.proPrice}, ${product.quantity}, '${product.proImage}')`)
+            .then((result) => {
+                return result.rowCount
+            })
+    }
+
+    getProInfo(proId){
+        return database.query(`select * from product where pro_id = ${proId}`).then((result) => {
+            return result.rows
+        })
+    }
+
+    updateProHasImage(product){
+        return database.query(`update product 
+                                    set pro_name = '${product.proName}',
+                                        cat_id = ${product.cateId},
+                                        supplier_id = ${product.supId},
+                                        price = ${product.price},
+                                        quantity = ${product.quantity},
+                                        pro_image = '${product.proImage}'
+                                        where pro_id = ${product.proId}`)
+            .then((result) => {
+                return result.rowCount
+            })
+    }
+
+    updatePro(product){
+        return database.query(`update product 
+                                    set pro_name = '${product.proName}',
+                                        cat_id = ${product.cateId},
+                                        supplier_id = ${product.supId},
+                                        price = ${product.price},
+                                        quantity = ${product.quantity}
+                                        where pro_id = ${product.proId}`)
+            .then((result) => {
+                return result.rowCount
+            })
+    }
+
+    deletePro(proId){
+        return database.query(`delete from product where pro_id = ${proId} returning *`)
+            .then((result) => {
+                return result.rows
+            })
+    }
+
+    findProAdmin(shopId, proName){
+        return database.query(`select p.pro_id,
+                                      c.cat_name,
+                                      s.supplier_name,
+                                      p.pro_name,
+                                      p.pro_image,
+                                      p.price,
+                                      p.quantity
+                               from product as p,
+                                    category as c,
+                                    supplier as s
+                               where c.cat_id = p.cat_id
+                                 and p.supplier_id = s.supplier_id
+                                 and p.shop_id = ${shopId}
+                                 and p.pro_name like '%${proName}%'`)
+            .then((result) => {
+                return result.rows
+            })
+    }
+
+    getProForCust(){
+        return database.query(`select p.pro_id,
+                                      sp.shop_name,  
+                                      c.cat_name,
+                                      s.supplier_name,
+                                      p.pro_name,
+                                      p.pro_image,
+                                      p.price,
+                                      p.quantity
+                               from product as p,
+                                    category as c,  
+                                    supplier as s,
+                                    shop as sp
+                               where c.cat_id = p.cat_id
+                                 and p.supplier_id = s.supplier_id
+                                 and sp.shop_id = p.shop_id`)
+            .then((result) => {
+                return result.rows
+            })
+    }
+
+    searchProForCust(proName){
+        return database.query(`select p.pro_id,
+                                      sp.shop_name,  
+                                      c.cat_name,
+                                      s.supplier_name,
+                                      p.pro_name,
+                                      p.pro_image,
+                                      p.price,
+                                      p.quantity
+                               from product as p,
+                                    category as c,  
+                                    supplier as s,
+                                    shop as sp
+                               where c.cat_id = p.cat_id
+                                 and p.supplier_id = s.supplier_id
+                                 and sp.shop_id = p.shop_id
+                                 and pro_name like '%${proName}%'`)
+            .then((result) => {
+                return result.rows
+            })
     }
 }
 

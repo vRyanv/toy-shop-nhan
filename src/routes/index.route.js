@@ -16,6 +16,7 @@ function indexRoute(app){
 
     //client
     app.get("/home",homeController.getHome)
+    app.get("/cust-search-pro/:name",homeController.custSearchPro)
 
     //register
     app.get("/register",registerController.register)
@@ -54,11 +55,11 @@ function indexRoute(app){
 
     //product
     app.get("/dashboard-admin", authentication.checkCookieAdmin, adminController.getProList)
-    // app.get('/product/find/:name', authentication.checkCookieAdmin, adminController.findPro)
+    app.get('/product/find/:name', authentication.checkCookieAdmin, adminController.findPro)
     app.post('/product/new', authentication.checkCookieAdmin, upload.single('proImage'), adminController.newPro)
-    // app.get('/product/edit/:id', authentication.checkCookieAdmin, adminController.getProInfo)
-    // app.put('/product/edit', authentication.checkCookieAdmin, adminController.updatePro)
-    // app.delete('/product/delete', authentication.checkCookieAdmin, adminController.deletePro)
+    app.get('/product/edit/:id', authentication.checkCookieAdmin, adminController.getProInfo)
+    app.put('/product/edit', authentication.checkCookieAdmin, upload.single('proImage'),adminController.updatePro)
+    app.delete('/product/delete', authentication.checkCookieAdmin, adminController.deletePro)
 
     //404
     app.get('*', homeController.notFound)

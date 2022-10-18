@@ -1,4 +1,5 @@
 const adminModel = require('../Model/AdminModel')
+const {unlink} = require('node:fs')
 
 class AdminController{
 
@@ -127,7 +128,6 @@ class AdminController{
             let supList = await adminModel.getSupList()
             res.render('dashboardSenior.ejs', {module: 'product', proList, cateList, supList, role: req.role})
         }
-
         handleGetProList()
     }
 
@@ -153,6 +153,80 @@ class AdminController{
             res.send({status: 400, notification: 'Invalid image'})
         }
     }
+
+    getProInfo(req, res){
+        let proId = req.params.id
+        adminModel.getProInfo(proId).then((result) => {
+            if(result.length !== 0){
+                res.send({status: 200, product:result[0]})
+            } else {
+                res.send({status: 400, notification: 'Not found product'})
+            }
+        })
+    }
+
+    updatePro(req, res){
+            var product = {
+                proId:req.body.proId,
+                proName:req.body.proName,
+                cateId:req.body.cateId,
+                supId:req.body.supId,
+                price:req.body.price,
+                quantity:req.body.quantity,
+            }
+
+            if(req.hasImage){
+                product.proImage = req.file.filename
+                const handleUpdate = async () => {
+                    let oldImage = await adminModel.getProInfo(product.proId)
+                    let result = await adminModel.updateProHasImage(product)
+                        if(result !== 0){
+                            unlink('src/public/image/'+ oldImage[0].pro_image, (err) => {
+                                res.send({status:200, notification: 'update product success'})
+                            });
+                        } else {
+                            res.send({status:400, notification: 'update product fail'})
+                        }
+                }
+
+                handleUpdate()
+
+            } else {
+                adminModel.updatePro(product).then((result) => {
+                    if(result !== 0){
+                        res.send({status:200, notification: 'update product success'})
+                    } else {
+                        res.send({status:400, notification: 'update product fail'})
+                    }
+                })
+            }
+    }
+
+    deletePro(req, res){
+        let proId = req.body.proId
+        adminModel.deletePro(proId).then((result) => {
+            if(result.length !== 0){
+                unlink('src/public/image/'+ result[0].pro_image, (err) => {
+                    res.send({status:200, notification: 'delete product success'})
+                });
+            } else {
+                res.send({status:400, notification: 'delete product fail'})
+            }
+        })
+    }
+
+    findPro(req, res){
+        let proName = req.params.name
+        let shopId = req.shopId
+        adminModel.findProAdmin(shopId, proName).then((result) =>{
+            if(result.length !== 0){
+                res.send({status:200, proList:result})
+            } else {
+                res.send({status:400, notification: 'Not found product'})
+            }
+        })
+    }
+
 }
 
 module.exports =  new AdminController

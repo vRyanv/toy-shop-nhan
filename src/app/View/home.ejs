@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Toy shop - ATN</title>
+<link rel="icon" href="/image/toys.png">
+<meta name="keywords" content="free website templates, free css templates, CSS, HTML" />
+<meta name="description" content="Toy Addict is a free website template provided by templatemo.com" />
+<link href="/css/templatemo_style.css" rel="stylesheet" type="text/css" />
+<link href="/css/animation.css" rel="stylesheet" />
+
+<script language="javascript" type="text/javascript">
+
+function clearText(field)
+{
+    if (field.defaultValue == field.value) field.value = '';
+    else if (field.value == '') field.value = field.defaultValue;
+}
+</script>
+</head>
+<body>
+<!--animation-->
+<%- include('animation.ejs') %>
+<!--animation-->
+<div id="templatemo_container">
+
+    <div id="templatemo_banner">
+    </div>
+    
+    <div id="templatemo_menu">
+	    <ul>
+            <li><a class="current">Home</a></li>
+            <li><a>About us</a></li>
+            <li><a >Popular</a></li>
+            <li><a >Gallery</a></li>
+            <li><a >Contact</a></li>
+            <li class="last"><a >More</a></li>
+        </ul>
+    </div>
+    
+    <div id="templatemo_content">
+        <div style=" padding-bottom: 1rem; text-align: end;">
+            <input class="form-control" id="txt_search_pro" placeholder="Search">
+            <button class="btn btn-outline-warning" id="btn_search_product" style="transform: translateY(-2px);">Search</button>
+        </div>
+        <div id="body_pro_list">
+            <% for (let i=0;i< proList.length;i++){ %>
+                <div class="ads_250_250" style="margin-bottom: 2rem; margin-left: 1rem">
+                    <img src="/image/<%= proList[i].pro_image %>" alt="image" width="250" height="250">
+                    <div style="text-align: left">
+                        <p id="pro_name">Name: <%= proList[i].pro_name %></p>
+                        <p id="cate_name">Category: <%= proList[i].cat_name %></p>
+                        <p id="pro_price">Price: $<%= proList[i].price %></p>
+                        <p id="sup_name">Supplier: <%= proList[i].supplier_name %> </p>
+                        <p id="shop_name">Shop: <%= proList[i].shop_name %></p>
+                        <p id="pro_quantity">Quantity: <%= proList[i].quantity %></p>
+                    </div>
+                </div>
+            <% } %>
+        </div>
+    </div>
+
+    <div id="templatemo_footer">
+		Copyright © 2022 <a>ATN shop</a> |
+    </div> <!-- end of footer -->
+
+</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+<script src="/js/home.js"></script>
+</html>
