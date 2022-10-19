@@ -24,7 +24,7 @@ const database = require('../src/Database/connect')
 //         console.log(result.rows)
 //     })
 
-database.query(`select * from product`).then((result) => {
-    console.log(result)
+database.query(`select * from account`).then((result) => {
+    console.log(result.rows)
 })
 database.end()

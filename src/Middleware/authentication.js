@@ -65,6 +65,18 @@ class Authentication
             res.render('authFail.ejs')
         }
     }
+
+    checkLoginCust(req, res, next){
+        try{
+            let token = req.cookies.__token
+            let decode = jwt.verify(token, tokenKey)
+            req.login = true
+            next()
+        }catch (error){
+            req.login = false
+            next()
+        }
+    }
 }
 
 module.exports = new Authentication

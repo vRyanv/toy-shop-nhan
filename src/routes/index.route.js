@@ -15,7 +15,7 @@ function indexRoute(app){
     app.get("/logout", loginController.logout)
 
     //client
-    app.get("/home",homeController.getHome)
+    app.get("/home", authentication.checkLoginCust, homeController.getHome)
     app.get("/cust-search-pro/:name",homeController.custSearchPro)
 
     //register

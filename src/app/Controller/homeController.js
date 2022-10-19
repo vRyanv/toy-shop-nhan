@@ -2,8 +2,9 @@ const adminModel = require('../Model/AdminModel')
 
 class homeController{
     getHome(req,res){
+
         adminModel.getProForCust().then((result) => {
-            res.render('home.ejs',{proList: result})
+            res.render('home.ejs',{proList: result, isLogin:req.login})
         })
 
     }

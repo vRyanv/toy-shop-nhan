@@ -34,7 +34,11 @@ function clearText(field)
             <li><a >Popular</a></li>
             <li><a >Gallery</a></li>
             <li><a >Contact</a></li>
-            <li class="last"><a >More</a></li>
+            <% if(isLogin){ %>
+                <li><a href="/logout">Logout</a></li>
+            <% } else {%>
+                <li><a href="/">Login</a></li>
+            <% } %>
         </ul>
     </div>
     
